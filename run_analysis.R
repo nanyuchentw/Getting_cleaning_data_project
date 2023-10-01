@@ -56,3 +56,6 @@ View(df)
 df$subject <- as.factor(df$subject)
 df_2 <- df %>% group_by(subject, activity) %>% summarise_all(mean)
 View(df_2)
+
+#output data set df_2
+write.csv(df_2, file="cleaned_df", row.names = FALSE)
