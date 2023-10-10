@@ -2,17 +2,20 @@ library(tidyverse)
 #read in common data
 activity_labels <- read.table(file="UCI HAR Dataset/activity_labels.txt")
 features <- read.table(file="UCI HAR Dataset/features.txt")
+
 #read in "train" data
 subject_train <- read.table(file="UCI HAR Dataset/train/subject_train.txt")
 x_train <- read.table(file="UCI HAR Dataset/train/x_train.txt")
 y_train <- read.table(file="UCI HAR Dataset/train/y_train.txt")
+
 #read in "test" data
 subject_test <- read.table(file="UCI HAR Dataset/test/subject_test.txt")
 x_test <- read.table(file="UCI HAR Dataset/test/X_test.txt")
 y_test <- read.table(file="UCI HAR Dataset/test/y_test.txt")
 
-#Because data in "Inertial Signals" do not contain mean or standard deviation for each measurement
-#Therefore, data in "Inertial Signals" are not used
+#Because we only need to extracts the measurements on the mean and standard deviation for each measurement and 
+#data in "Inertial Signals" do not contain "mean" or "std" on their variable names
+#Therefore, data in "Inertial Signals" are not used in the following
 
 # body_acc_x_train <- read.table(file="UCI HAR Dataset/train/Inertial Signals/body_acc_x_train.txt")
 # body_acc_y_train <- read.table(file="UCI HAR Dataset/train/Inertial Signals/body_acc_y_train.txt")
@@ -58,4 +61,4 @@ df_2 <- df %>% group_by(subject, activity) %>% summarise_all(mean)
 View(df_2)
 
 #output data set df_2
-write.csv(df_2, file="cleaned_df", row.names = FALSE)
+write.csv(df_2, file="cleaned_df.csv", row.names = FALSE)
