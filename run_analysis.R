@@ -53,7 +53,6 @@ df <- df %>% select(contains("mean")|contains("std"), 562:563)
 
 #Uses descriptive activity names to name the activities in the data set
 df$activity <- factor(df$activity, levels=activity_labels$V1, labels=activity_labels$V2)
-View(df)
 
 #From the above data set (df), creates a second tidy data set with the average of each variable for each activity and each subject
 df$subject <- as.factor(df$subject)
@@ -61,4 +60,6 @@ df_2 <- df %>% group_by(subject, activity) %>% summarise_all(mean)
 View(df_2)
 
 #output data set df_2
-write.csv(df_2, file="cleaned_df.csv", row.names = FALSE)
+write.table(df_2, file="cleaned_df.txt", row.names = FALSE)
+# test <- read.table("cleaned_df.txt", header = TRUE)
+# View(test)
